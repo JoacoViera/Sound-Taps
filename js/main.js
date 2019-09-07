@@ -41,7 +41,6 @@ window.addEventListener("load", () => {
     window.addEventListener("onkeypress", checkKeyPressed, false);
 
     function checkKeyPressed(evt) {
-      console.log(evt.keyCode);
       //q:81 w:87 e:69 i:73 o:79 o:80
       if (evt.keyCode == "81") {
           sounds[0].currentTime = 0;
