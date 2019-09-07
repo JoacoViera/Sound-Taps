@@ -30,7 +30,20 @@ window.addEventListener("load", () => {
       const bubble = document.createElement("div");
       visual.appendChild(bubble);
       bubble.style.backgroundColor = colors[index];
+
+      
+      const largeLeft = boxes[index].getBoundingClientRect().left;
+      const largeRigth = boxes[index].getBoundingClientRect().right;
+      const bubblePosition = largeRigth + ((largeLeft - largeRigth));
+
+      bubble.style.width = (largeRigth - largeLeft)/2+"px";
+      bubble.style.height = (largeRigth - largeLeft)/2+"px";
+      console.log((largeRigth - largeLeft));
+      console.log(bubblePosition);
+      console.log(boxes[index].getBoundingClientRect());
+
       bubble.style.animation = `jump 1s ease`;
+      bubble.style.left = bubblePosition+ "px";
       //Remember that 1 bubble will be a new div in the dom so maybe the performance after some clicks will.. well you know
       //Solution: we use the bubble, we remove the bubble :V
       bubble.addEventListener("animationend", function() {
@@ -41,7 +54,6 @@ window.addEventListener("load", () => {
     window.addEventListener("keyup", checkKeyPressed, false);
 
     function checkKeyPressed(evt) {
-      console.log(evt.keyCode);
       //q:81 w:87 e:69 i:73 o:79 o:80
       if (evt.keyCode == "81") {
           sounds[0].currentTime = 0;
