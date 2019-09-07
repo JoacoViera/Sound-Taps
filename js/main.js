@@ -37,5 +37,42 @@ window.addEventListener("load", () => {
         visual.removeChild(this);
       });
     };
+
+    window.addEventListener("onkeypress", checkKeyPressed, false);
+
+    function checkKeyPressed(evt) {
+      console.log(evt.keyCode);
+      //q:81 w:87 e:69 i:73 o:79 o:80
+      if (evt.keyCode == "81") {
+          sounds[0].currentTime = 0;
+          sounds[0].play();
+          createBubble(0);
+        }
+        if(evt.keyCode == "87"){
+          sounds[1].currentTime = 0;
+          sounds[1].play();
+          createBubble(1);
+        }
+        if(evt.keyCode == "69"){
+          sounds[2].currentTime = 0;
+          sounds[2].play();
+          createBubble(2);
+        }
+        if(evt.keyCode == "73"){
+          sounds[3].currentTime = 0;
+          sounds[3].play();
+          createBubble(3);
+        }
+        if(evt.keyCode == "79"){
+          sounds[4].currentTime = 0;
+          sounds[4].play();
+          createBubble(4);
+        }
+        if(evt.keyCode == "80"){
+          sounds[5].currentTime = 0;
+          sounds[5].play();
+          createBubble(5);
+        }
+    }
   });
   
