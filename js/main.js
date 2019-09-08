@@ -2,14 +2,22 @@ window.addEventListener("load", () => {
     const sounds = document.querySelectorAll(".sound");
     const boxes = document.querySelectorAll(".boxes div");
     const visual = document.querySelector(".view-container");
-    //We are going to create bubbles with the same colors as the boxex
-    const colors = [
-      "#60d394",
-      "#d36060",
-      "#c060d3",
-      "#d3d160",
-      "#606bd3",
-      "#60c2d3"
+
+    const colors = [];
+    boxes.forEach(box => {
+      colors.push(box.style.backgroundColor);
+    });
+
+    /**
+     * We are gonna put  this colors in the div when we press them!
+     */
+    const colorsChange = [
+      "red",
+      "yellow",
+      "green",
+      "purple",
+      "blue",
+      "rgb(238, 68, 1)",
     ];
   
     //lets make the boxes make some noise!
@@ -20,70 +28,60 @@ window.addEventListener("load", () => {
         sounds[index].currentTime = 0;
         // Play the sound in the box that we cliked
         sounds[index].play();
-        createBubble(index);
+        changeColor(index);
       });
     });
   
-    // Each bubble will be a new div
-    const createBubble = (index) => {
-      //Let's create bubbles!
-      const bubble = document.createElement("div");
-      visual.appendChild(bubble);
-      bubble.style.backgroundColor = colors[index];
+    /**
+     * We change de bg color of the box that we clicked, 300 ms after we
+     * return the original bg color
+     * @param {the index of each box} index 
+     */
+    const changeColor = (index) => {
+      boxes[index].style.backgroundColor = colorsChange[index];
+      setTimeout(() => {
+        boxes[index].style.backgroundColor = colors[index];
+      }, 300);
 
-      
-      const largeLeft = boxes[index].getBoundingClientRect().left;
-      const largeRigth = boxes[index].getBoundingClientRect().right;
-      const bubblePosition = largeRigth + ((largeLeft - largeRigth));
-
-      bubble.style.width = (largeRigth - largeLeft)/2+"px";
-      bubble.style.height = (largeRigth - largeLeft)/2+"px";
-      console.log((largeRigth - largeLeft));
-      console.log(bubblePosition);
-      console.log(boxes[index].getBoundingClientRect());
-
-      bubble.style.animation = `jump 1s ease`;
-      bubble.style.left = bubblePosition+ "px";
-      //Remember that 1 bubble will be a new div in the dom so maybe the performance after some clicks will.. well you know
-      //Solution: we use the bubble, we remove the bubble :V
-      bubble.addEventListener("animationend", function() {
-        visual.removeChild(this);
-      });
     };
 
     window.addEventListener("keyup", checkKeyPressed, false);
 
+    /**
+     * We set the keys that want to click on the boxes to play the noises.
+     * @param {event} evt 
+     */
     function checkKeyPressed(evt) {
       //q:81 w:87 e:69 i:73 o:79 o:80
       if (evt.keyCode == "81") {
           sounds[0].currentTime = 0;
           sounds[0].play();
-          createBubble(0);
+          changeColor(0);
         }
         if(evt.keyCode == "87"){
           sounds[1].currentTime = 0;
           sounds[1].play();
-          createBubble(1);
+          changeColor(1);
         }
         if(evt.keyCode == "69"){
           sounds[2].currentTime = 0;
           sounds[2].play();
-          createBubble(2);
+          changeColor(2);
         }
         if(evt.keyCode == "73"){
           sounds[3].currentTime = 0;
           sounds[3].play();
-          createBubble(3);
+          changeColor(3);
         }
         if(evt.keyCode == "79"){
           sounds[4].currentTime = 0;
           sounds[4].play();
-          createBubble(4);
+          changeColor(4);
         }
         if(evt.keyCode == "80"){
           sounds[5].currentTime = 0;
           sounds[5].play();
-          createBubble(5);
+          changeColor(5);
         }
     }
   });
